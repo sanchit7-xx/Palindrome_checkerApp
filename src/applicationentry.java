@@ -1,28 +1,24 @@
 public class applicationentry {
     public static void main(String[] args) {
-        String word = "racecar";
+        String word = "madam";
 
-        // Convert string to character array
-        char[] chars = word.toCharArray();
+        // Create a stack
+        Stack<Character> stack = new Stack<>();
 
-        // Two pointers
-        int start = 0;
-        int end = chars.length - 1;
-
-        boolean isPalindrome = true;
-
-        // Compare characters using two-pointer technique
-        while (start < end) {
-            if (chars[start] != chars[end]) {
-                isPalindrome = false;
-                break;
-            }
-            start++;
-            end--;
+        // Push characters into the stack
+        for (int i = 0; i < word.length(); i++) {
+            stack.push(word.charAt(i));
         }
 
-        // Display result
-        if (isPalindrome) {
+        // Build reversed string using pop
+        String reversed = "";
+
+        while (!stack.isEmpty()) {
+            reversed = reversed + stack.pop();
+        }
+
+        // Compare original and reversed string
+        if (word.equals(reversed)) {
             System.out.println("The string \"" + word + "\" is a Palindrome.");
         } else {
             System.out.println("The string \"" + word + "\" is NOT a Palindrome.");
