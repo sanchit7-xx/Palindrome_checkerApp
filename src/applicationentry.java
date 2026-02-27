@@ -1,41 +1,44 @@
-import java.util.Queue;
+import java.util.Deque;
 import java.util.LinkedList;
-import java.util.Stack;
 public class applicationentry {
-    public static void main(String[] args) {
-                // Original string
-                String word = "level";
 
-                // Create Queue and Stack
-                Queue<Character> queue = new LinkedList<>();
-                Stack<Character> stack = new Stack<>();
 
-                // Insert characters into Queue and Stack
-                for (int i = 0; i < word.length(); i++) {
-                    char ch = word.charAt(i);
-                    queue.add(ch);      // Enqueue
-                    stack.push(ch);     // Push
+
+        public static void main(String[] args) {
+
+            // Original string
+            String word = "radar";
+
+            // Create a Deque
+            Deque<Character> deque = new LinkedList<>();
+
+            // Insert characters into deque
+            for (int i = 0; i < word.length(); i++) {
+                deque.addLast(word.charAt(i));
+            }
+
+            boolean isPalindrome = true;
+
+            // Compare front and rear elements
+            while (deque.size() > 1) {
+
+                char front = deque.removeFirst();
+                char rear = deque.removeLast();
+
+                if (front != rear) {
+                    isPalindrome = false;
+                    break;
                 }
+            }
 
-                boolean isPalindrome = true;
-
-                // Compare dequeue from queue and pop from stack
-                while (!queue.isEmpty()) {
-                    if (queue.remove() != stack.pop()) {
-                        isPalindrome = false;
-                        break;
-                    }
-                }
-
-                // Display result
-                if (isPalindrome) {
-                    System.out.println("The string \"" + word + "\" is a Palindrome.");
-                } else {
-                    System.out.println("The string \"" + word + "\" is NOT a Palindrome.");
-
+            // Display result
+            if (isPalindrome) {
+                System.out.println("The string \"" + word + "\" is a Palindrome.");
+            } else {
+                System.out.println("The string \"" + word + "\" is NOT a Palindrome.");
             }
         }
-}
+    }
 
 
 
