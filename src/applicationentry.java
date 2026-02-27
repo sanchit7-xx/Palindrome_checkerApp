@@ -1,43 +1,77 @@
-import java.util.Deque;
-import java.util.LinkedList;
 public class applicationentry {
+            // Node class for singly linked list
+            static class Node {
+                char data;
+                Node next;
 
-
-
-        public static void main(String[] args) {
-
-            // Original string
-            String word = "radar";
-
-            // Create a Deque
-            Deque<Character> deque = new LinkedList<>();
-
-            // Insert characters into deque
-            for (int i = 0; i < word.length(); i++) {
-                deque.addLast(word.charAt(i));
-            }
-
-            boolean isPalindrome = true;
-
-            // Compare front and rear elements
-            while (deque.size() > 1) {
-
-                char front = deque.removeFirst();
-                char rear = deque.removeLast();
-
-                if (front != rear) {
-                    isPalindrome = false;
-                    break;
+                Node(char data) {
+                    this.data = data;
+                    this.next = null;
                 }
             }
 
-            // Display result
-            if (isPalindrome) {
-                System.out.println("The string \"" + word + "\" is a Palindrome.");
-            } else {
-                System.out.println("The string \"" + word + "\" is NOT a Palindrome.");
+            public static void main(String[] args) {
+
+                String word = "level";
+
+                // Convert string to linked list
+                Node head = null;
+                Node tail = null;
+
+                for (int i = 0; i < word.length(); i++) {
+                    Node newNode = new Node(word.charAt(i));
+
+                    if (head == null) {
+                        head = newNode;
+                        tail = newNode;
+                    } else {
+                        tail.next = newNode;
+                        tail = newNode;
+                    }
+                }
+
+                // Find middle using fast and slow pointer
+                Node slow = head;
+                Node fast = head;
+
+                while (fast != null && fast.next != null) {
+                    slow = slow.next;
+                    fast = fast.next.next;
+                }
+
+                // Reverse second half of linked list
+                Node prev = null;
+                Node current = slow;
+
+                while (current != null) {
+                    Node nextNode = current.next;
+                    current.next = prev;
+                    prev = current;
+                    current = nextNode;
+                }
+
+                // Compare first half and reversed second half
+                Node firstHalf = head;
+                Node secondHalf = prev;
+
+                boolean isPalindrome = true;
+
+                while (secondHalf != null) {
+                    if (firstHalf.data != secondHalf.data) {
+                        isPalindrome = false;
+                        break;
+                    }
+                    firstHalf = firstHalf.next;
+                    secondHalf = secondHalf.next;
+                }
+
+                // Print result
+                if (isPalindrome) {
+                    System.out.println("The string \"" + word + "\" is a Palindrome.");
+                } else {
+                    System.out.println("The string \"" + word + "\" is NOT a Palindrome.");
+                }
             }
-        }
     }
 
 
