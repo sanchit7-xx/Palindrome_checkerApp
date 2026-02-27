@@ -1,23 +1,33 @@
 public class applicationentry {
     public static void main(String[] args) {
+        String word = "racecar";
 
-        // Original string
-        String original = "level";
+        // Convert string to character array
+        char[] chars = word.toCharArray();
 
-        // Variable to store reversed string
-        String reversed = "";
+        // Two pointers
+        int start = 0;
+        int end = chars.length - 1;
 
-        // Reverse the string using for loop
-        for (int i = original.length() - 1; i >= 0; i--) {
-            reversed = reversed + original.charAt(i);
+        boolean isPalindrome = true;
+
+        // Compare characters using two-pointer technique
+        while (start < end) {
+            if (chars[start] != chars[end]) {
+                isPalindrome = false;
+                break;
+            }
+            start++;
+            end--;
         }
 
-        // Compare original and reversed string
-        if (original.equals(reversed)) {
-            System.out.println("The string \"" + original + "\" is a Palindrome.");
+        // Display result
+        if (isPalindrome) {
+            System.out.println("The string \"" + word + "\" is a Palindrome.");
         } else {
-            System.out.println("The string \"" + original + "\" is NOT a Palindrome.");
+            System.out.println("The string \"" + word + "\" is NOT a Palindrome.");
         }
+
     }
 }
 
