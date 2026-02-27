@@ -1,78 +1,34 @@
 public class applicationentry {
-            // Node class for singly linked list
-            static class Node {
-                char data;
-                Node next;
+    // Recursive method to check palindrome
+    static boolean isPalindrome(String str, int start, int end) {
 
-                Node(char data) {
-                    this.data = data;
-                    this.next = null;
-                }
-            }
+        // Base condition
+        if (start >= end) {
+            return true;
+        }
 
-            public static void main(String[] args) {
+        // If characters do not match
+        if (str.charAt(start) != str.charAt(end)) {
+            return false;
+        }
 
-                String word = "level";
-
-                // Convert string to linked list
-                Node head = null;
-                Node tail = null;
-
-                for (int i = 0; i < word.length(); i++) {
-                    Node newNode = new Node(word.charAt(i));
-
-                    if (head == null) {
-                        head = newNode;
-                        tail = newNode;
-                    } else {
-                        tail.next = newNode;
-                        tail = newNode;
-                    }
-                }
-
-                // Find middle using fast and slow pointer
-                Node slow = head;
-                Node fast = head;
-
-                while (fast != null && fast.next != null) {
-                    slow = slow.next;
-                    fast = fast.next.next;
-                }
-
-                // Reverse second half of linked list
-                Node prev = null;
-                Node current = slow;
-
-                while (current != null) {
-                    Node nextNode = current.next;
-                    current.next = prev;
-                    prev = current;
-                    current = nextNode;
-                }
-
-                // Compare first half and reversed second half
-                Node firstHalf = head;
-                Node secondHalf = prev;
-
-                boolean isPalindrome = true;
-
-                while (secondHalf != null) {
-                    if (firstHalf.data != secondHalf.data) {
-                        isPalindrome = false;
-                        break;
-                    }
-                    firstHalf = firstHalf.next;
-                    secondHalf = secondHalf.next;
-                }
-
-                // Print result
-                if (isPalindrome) {
-                    System.out.println("The string \"" + word + "\" is a Palindrome.");
-                } else {
-                    System.out.println("The string \"" + word + "\" is NOT a Palindrome.");
-                }
-            }
+        // Recursive call
+        return isPalindrome(str, start + 1, end - 1);
     }
+
+    public static void main(String[] args) {
+
+        String word = "madam";
+
+        boolean result = isPalindrome(word, 0, word.length() - 1);
+
+        if (result) {
+            System.out.println("The string \"" + word + "\" is a Palindrome.");
+        } else {
+            System.out.println("The string \"" + word + "\" is NOT a Palindrome.");
+        }
+    }
+}
 
 
 
